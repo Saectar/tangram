@@ -133,6 +133,10 @@ styles:
         base: points
         texture: pois
 
+    inlay_text:
+        base: text
+        blend: inlay
+
 sources:
     # When commented, demo main.js will set source based on URL - uncomment for testing
     # osm:
@@ -288,7 +292,7 @@ layers:
 
         draw:
             polygons:
-                order: 50
+                order: 51
                 color: [.65, .65, .65]
 
         # turn interactive feature selection on for buildings with names
@@ -314,6 +318,13 @@ layers:
     road_labels:
         data: { source: osm, layer: roads }
         filter: { name: true, aeroway: false, tunnel: false, railway: false, not: { kind: rail }, $zoom: { min: 10 } }
+
+        # inlay road labels above roads but underneath buildings
+        draw:
+            text:
+                style: inlay_text
+                order: 50
+
         highway:
             filter: { kind: highway, $zoom: { min: 7 } }
             draw:
